@@ -5,31 +5,30 @@ function DisplayPets(pets) {
   return (
     <>
       <h1>{pets.length} Pets Found!</h1>
-      {pets.map((pet) => (
+      {pets.map((animal) => (
         <Pet
-          // {...pet}
-          key={pet.id}
-          animal={pet.type}
-          breed={pet.breeds.primary}
-          name={pet.name}
-          media={pet.photos}
-          location={`${pet.contact.address.city},${pet.contact.address.state}`}
-          id={pet.id}
+          key={animal.id}
+          animal={animal.type}
+          breed={animal.breeds.primary}
+          name={animal.name}
+          media={animal.photos}
+          location={`${animal.contact.address.city},${animal.contact.address.state}`}
+          id={animal.id}
         />
       ))}
     </>
   );
 }
 
-const Results = ({ pets: { pets, loading } }) => {
+const Results = ({ pets, loading }) => {
   return (
     <div className="search">
       {loading ? (
         <h1>Loading...</h1>
       ) : pets.length === 0 ? (
-        <h1>No Pets Found</h1>
+        <h1>No Pet Found</h1>
       ) : (
-        DisplayPets(pets, loading)
+        DisplayPets(pets)
       )}
     </div>
   );
