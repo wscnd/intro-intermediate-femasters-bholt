@@ -1,18 +1,20 @@
-import React, { useState, useEffect, useContext } from "react";
 import pet, { ANIMALS } from "@frontendmasters/pet";
+import React, { useContext, useEffect, useState } from "react";
+import HomeLocation from "./HomeLocation";
 import Results from "./Results";
-import useDropdown from "./useDropdown";
+import ThemeColor from "./ThemeColor";
 import ThemeContext from "./ThemeContext";
+import useDropdown from "./useDropdown";
 
 const SearchParams = ({ location: locationFromProps }) => {
   console.log(locationFromProps.state);
   const [location, setLocation] = useState("Seattle, WA");
-  const [breedList, setBreedList] = useState([]);
   const [animal, , AnimalDropdown] = useDropdown("Animal", "", ANIMALS);
-  const [breed, setBreed, BreedDropdown] = useDropdown("Breed", "", breedList);
   const [pets, setPets] = useState([]);
+  const [breedList, setBreedList] = useState([]);
+  const [breed, setBreed, BreedDropdown] = useDropdown("Breed", "", breedList);
   const [loading, setLoading] = useState(false);
-  const [theme, setTheme] = useContext(ThemeContext);
+  const [theme] = useContext(ThemeContext);
 
   async function requestPets() {
     await pet
@@ -38,7 +40,7 @@ const SearchParams = ({ location: locationFromProps }) => {
         setBreedList(apiBreeds.map(({ name }) => name));
       }, console.error);
     }
-  }, [animal, setBreed]);
+  }, [animal, setBreed, breed]);
 
   return (
     <div className="search-params">
@@ -50,32 +52,10 @@ const SearchParams = ({ location: locationFromProps }) => {
           requestPets();
         }}
       >
-        <label htmlFor="location">
-          Location
-          <input
-            type="text"
-            id="location"
-            value={location}
-            placeholder="Location"
-            onChange={(e) => setLocation(e.target.value)}
-          />
-        </label>
+        <HomeLocation location={location} callback={setLocation} />
         <AnimalDropdown />
         <BreedDropdown />
-        <label htmlFor="theme">
-          Theme
-          <select
-            value={theme}
-            onChange={(e) => setTheme(e.target.value)}
-            onBlur={(e) => setTheme(e.target.value)}
-          >
-            <option value="">Colors</option>
-            <option value="peru">Peru</option>
-            <option value="mediumorchid">Medium Orchid</option>
-            <option value="darkblue">darkblue</option>
-            <option value="chartreuse">Charreuse</option>
-          </select>
-        </label>
+        <ThemeColor />
         <button style={{ backgroundColor: theme }}>Submit</button>
       </form>
       <Results pets={pets} type={animal} loading={loading} />

@@ -72,14 +72,8 @@ class Details extends React.Component {
                     breed: breed,
                   }}
                 >
-                  Click here
+                  <button>Go back HOME</button>
                 </Link>
-                {/* <button
-                  onClick={this.toggleModal}
-                  style={{ backgroundColor: theme }}
-                >
-                  Go Back
-                </button> */}
               </>
             )}
           </ThemeContext.Consumer>
@@ -89,8 +83,24 @@ class Details extends React.Component {
               <div>
                 <h1>Would you like to adopt {name}</h1>
                 <div className="buttons">
-                  <button onClick={this.adopt}>Yes</button>
-                  <button onClick={this.toggleModal}>No I`m a monster</button>
+                  <ThemeContext.Consumer>
+                    {([theme]) => (
+                      <>
+                        <button
+                          style={{ backgroundColor: theme }}
+                          onClick={this.adopt}
+                        >
+                          Yes
+                        </button>
+                        <button
+                          style={{ backgroundColor: theme }}
+                          onClick={this.toggleModal}
+                        >
+                          No I`m a monster
+                        </button>
+                      </>
+                    )}
+                  </ThemeContext.Consumer>
                 </div>
               </div>
             </Modal>

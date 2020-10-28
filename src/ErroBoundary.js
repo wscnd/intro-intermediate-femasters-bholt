@@ -27,10 +27,12 @@ class ErrorBoundary extends React.Component {
 
     if (this.state.hasError) {
       return (
-        <h1>
-          There was an error with this listing. <Link to="/">Click here</Link>{" "}
-          to go back to home page.
-        </h1>
+        <div className="details">
+          <h1>
+            There was an error with this listing. <Link to="/">Click here</Link>{" "}
+            to go back to home page or wait for 5 secs.
+          </h1>
+        </div>
       );
     }
     return this.props.children;
