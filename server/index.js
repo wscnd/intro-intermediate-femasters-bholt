@@ -16,15 +16,20 @@ const app = express();
 app.use("/dist", express.static("dist/"));
 
 app.use((req, res) => {
+  res.write(parts[0]);
   const reactMarkup = (
     <ServerLocation url={req.url}>
       <App />
     </ServerLocation>
   );
 
-  res.send(parts[0] + renderToNodeStream(reactMarkup) + parts[1]);
+  const stream = renderToNodeStream(reactMarkup);
 
-  res.end();
+  stream.pipe(res, { end: false });
+  stream.on("end", () => {
+    res.write(parts[1]);
+    res.end();
+  });
 });
 
 console.log("listening on port" + PORT);
