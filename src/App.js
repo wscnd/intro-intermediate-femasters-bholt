@@ -1,18 +1,11 @@
-import React, { useState, lazy, Suspense } from "react";
 import { Router } from "@reach/router";
-import { render } from "react-dom";
+import React, { lazy, Suspense, useState } from "react";
+import NavBar from "~/components/NavBar";
 import ThemeContext from "~/context/ThemeContext";
-import NavBar from "./components/NavBar";
-import Spinner from "./components/Spinner";
-import colors from "~/pages/style";
 
-const Details = lazy(() =>
-  import("~/pages/").then((module) => ({ default: module.Details }))
-);
+const Home = lazy(() => import("~/pages/Home/Home"));
 
-const Home = lazy(() =>
-  import("~/pages/").then((module) => ({ default: module.Home }))
-);
+const Details = lazy(() => import("~/pages/Details/Details"));
 
 const App = () => {
   const theme = useState("darkblue");
@@ -22,7 +15,7 @@ const App = () => {
       <React.StrictMode>
         <div>
           <NavBar />
-          <Suspense fallback={<Spinner size={50} color={colors.primary} />}>
+          <Suspense fallback={"rednering"}>
             <Router>
               <Home path="/" />
               <Details path="/details/:id" />
@@ -34,4 +27,4 @@ const App = () => {
   );
 };
 
-render(<App />, document.getElementById("root"));
+export default App;

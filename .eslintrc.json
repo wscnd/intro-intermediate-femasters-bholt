@@ -39,9 +39,6 @@
         },
         "import/resolver": {
             "parcel": {
-                "extensions": [
-                    ".js"
-                ],
                 "rootDir": "./src"
             }
         }

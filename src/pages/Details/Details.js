@@ -1,10 +1,11 @@
 import pet from "@frontendmasters/pet";
 import { Link, navigate } from "@reach/router";
-import React from "react";
+import React, { lazy } from "react";
 import ThemeContext from "~/context/ThemeContext";
 import DetailsErrorBoundary from "~/pages/Details/components/DetailsErrorBoundary";
 import DisplayPet from "~/pages/Details/DisplayPet";
-import Modal from "~/components/Modal";
+
+const Modal = lazy(() => import("~/components/Modal"));
 
 class Details extends React.Component {
   state = { loading: true, showModal: false };
