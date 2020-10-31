@@ -17,6 +17,7 @@ app.use("/dist", express.static("dist/"));
 
 app.use((req, res) => {
   res.write(parts[0]);
+
   const reactMarkup = (
     <ServerLocation url={req.url}>
       <App />
@@ -25,10 +26,13 @@ app.use((req, res) => {
 
   const stream = renderToNodeStream(reactMarkup);
 
-  stream.pipe(res, { end: false });
+  stream.pipe(
+    res, //send markup into res
+    { end: false } //don't end once is done
+  );
   stream.on("end", () => {
-    res.write(parts[1]);
-    res.end();
+    res.write(parts[1]); //write html
+    res.end(); //finish
   });
 });
 
