@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function HomeLocation({ location, callback }) {
+export default function Location({ location, callback }) {
   return (
     <>
       <label htmlFor="location">

@@ -6,10 +6,10 @@ class Carousel extends React.Component {
     active: 0,
   };
 
-  static getDerivedStateFromProps({ media }) {
+  static getDerivedStateFromProps({ mediaData }) {
     let photos = ["http://placecorgi.com/600/600"];
-    if (media.length) {
-      photos = media.map(({ large }) => large);
+    if (mediaData.length) {
+      photos = mediaData.map(({ large }) => large);
     }
     return { photos };
   }

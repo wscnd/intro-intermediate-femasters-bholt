@@ -1,13 +1,12 @@
 import React from "react";
 import { Link, Redirect } from "@reach/router";
 
-class ErrorBoundary extends React.Component {
+class DetailsErrorBoundary extends React.Component {
   state = { hasError: false, redirect: false };
 
   static getDerivedStateFromError() {
     return { hasError: true };
   }
-
   componentDidCatch(error, info) {
     console.error("ErrorBoundary caugh an error", error, info);
   }
@@ -39,4 +38,4 @@ class ErrorBoundary extends React.Component {
   }
 }
 
-export default ErrorBoundary;
+export default DetailsErrorBoundary;

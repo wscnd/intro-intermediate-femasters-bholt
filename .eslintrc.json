@@ -1,7 +1,7 @@
 {
     "extends": [
         "eslint:recommended",
-        "plugin:import/errors",
+        // "plugin:import/errors",
         "plugin:react/recommended",
         "plugin:react-hooks/recommended",
         "plugin:jsx-a11y/recommended",
@@ -16,7 +16,7 @@
     },
     "plugins": [
         "react",
-        "import",
+        // "import",
         "jsx-a11y",
         "react-hooks"
     ],
@@ -36,6 +36,14 @@
     "settings": {
         "react": {
             "version": "detect"
+        },
+        "import/resolver": {
+            "parcel": {
+                "extensions": [
+                    ".js"
+                ],
+                "rootDir": "./src"
+            }
         }
     }
 }

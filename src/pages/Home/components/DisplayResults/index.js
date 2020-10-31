@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
+import StateContext from "~/context/StateContext";
+import SearchResults from "~/components/SearchResults";
 import Pet from "./Pet";
 
 function DisplayPets(pets) {
@@ -20,9 +22,15 @@ function DisplayPets(pets) {
   );
 }
 
-const Results = ({ pets, loading }) => {
+export default function DisplayResults() {
+  const {
+    states: {
+      getters: { pets, loading },
+    },
+  } = useContext(StateContext);
+
   return (
-    <div className="search">
+    <SearchResults className={"search"}>
       {loading ? (
         <h1>Loading...</h1>
       ) : pets.length === 0 ? (
@@ -30,8 +38,6 @@ const Results = ({ pets, loading }) => {
       ) : (
         DisplayPets(pets)
       )}
-    </div>
+    </SearchResults>
   );
-};
-
-export default Results;
+}

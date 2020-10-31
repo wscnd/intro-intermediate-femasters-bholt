@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import ThemeContext from "./ThemeContext";
+import ThemeContext from "~/context/ThemeContext";
 
 const colors = [
   {
@@ -24,8 +24,7 @@ const colors = [
   },
 ];
 
-const ThemeColor = () => {
-  // const ThemeColor = ({ theme, callback }) => {
+const ThemeDropdown = () => {
   const [theme, setTheme] = useContext(ThemeContext);
   return (
     <label htmlFor="theme">
@@ -33,8 +32,6 @@ const ThemeColor = () => {
       <div className="select-container">
         <select
           value={theme}
-          // onChange={(e) => callback(e.target.value)}
-          // onBlur={(e) => callback(e.target.value)}
           onChange={(e) => setTheme(e.target.value)}
           onBlur={(e) => setTheme(e.target.value)}
         >
@@ -49,4 +46,4 @@ const ThemeColor = () => {
   );
 };
 
-export default ThemeColor;
+export default ThemeDropdown;
