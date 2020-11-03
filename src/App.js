@@ -3,6 +3,7 @@ import React from "react";
 import { Provider } from "react-redux";
 import NavBar from "~/components/NavBar";
 import store from "~/redux/store/";
+import { render } from "react-dom";
 import { Details } from "~/pages";
 import { Home } from "~/pages";
 
@@ -22,4 +23,4 @@ const App = () => {
   );
 };
 
-ReactDOM.render(<App />, document.getElementById("root"));
+render(<App />, document.getElementById("root"));
