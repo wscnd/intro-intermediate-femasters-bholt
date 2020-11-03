@@ -104,7 +104,6 @@ const WrappedDetails = connect(mapStateToProps)(Details);
 export default function DetailsWithErroBoundary(props) {
   return (
     <DetailsErrorBoundary>
-      {" "}
       <WrappedDetails {...props} />
     </DetailsErrorBoundary>
   );
