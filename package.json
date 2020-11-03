@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "parcel build --public-url ./dist/ src/index.html ",
+    "build": "parcel build src/index.html ",
     "preinstall": "npx npm-force-resolutions",
     "clear-cache": "rm -rf .cache/ dist/",
     "clear-modules": "rm -rf node_modules",
