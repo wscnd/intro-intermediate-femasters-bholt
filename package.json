@@ -12,7 +12,6 @@
     "dev:mock": "cross-env PET_MOCK=mock parcel src/index.html",
     "format": "prettier \"./src/**/*.{js,html}\" --write",
     "lint": "eslint \"./src/**/*.{js,jsx}\" --quiet",
-    "start": "npm run build && babel-node server/index.js",
     "test": "jest"
   },
   "keywords": [],
