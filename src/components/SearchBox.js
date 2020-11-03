@@ -1,8 +1,12 @@
-import React, { useContext } from "react";
-import ThemeContext from "~/context/ThemeContext";
+import React from "react";
 
-const SearchBox = ({ children, className, buttonName, ...formActions }) => {
-  const [theme] = useContext(ThemeContext);
+const SearchBox = ({
+  children,
+  className,
+  buttonName,
+  theme,
+  ...formActions
+}) => {
   return (
     <div className={className}>
       <form {...formActions}>

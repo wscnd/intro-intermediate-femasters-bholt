@@ -1,9 +1,10 @@
+import PropTypes from "prop-types";
 import pet from "@frontendmasters/pet";
 import { Link, navigate } from "@reach/router";
 import React, { lazy } from "react";
-import ThemeContext from "~/context/ThemeContext";
 import DetailsErrorBoundary from "~/pages/Details/components/DetailsErrorBoundary";
 import DisplayPet from "~/pages/Details/DisplayPet";
+import { connect } from "react-redux";
 
 const Modal = lazy(() => import("~/components/Modal"));
 
@@ -41,6 +42,7 @@ class Details extends React.Component {
       );
     }
 
+    /* eslint-disable no-unused-vars */
     const {
       animal,
       breed,
@@ -53,51 +55,39 @@ class Details extends React.Component {
 
     return (
       <DisplayPet state={this.state}>
-        <ThemeContext.Consumer>
-          {([theme]) => (
-            <>
-              <button
-                onClick={this.toggleModal}
-                style={{ backgroundColor: theme }}
-              >
-                Adopt {name}
-              </button>
-              <Link
-                to="/"
-                state={{
-                  animal: animal,
-                  breed: breed,
-                }}
-              >
-                <button>Go back HOME</button>
-              </Link>
-            </>
-          )}
-        </ThemeContext.Consumer>
+        <button
+          onClick={this.toggleModal}
+          style={{ backgroundColor: this.props.theme }}
+        >
+          Adopt {name}
+        </button>
+        <Link
+          to="/"
+          state={{
+            animal: animal,
+            breed: breed,
+          }}
+        >
+          <button>Go back HOME</button>
+        </Link>
 
         {showModal ? (
           <Modal>
             <div>
               <h1>Would you like to adopt {name}</h1>
               <div className="buttons">
-                <ThemeContext.Consumer>
-                  {([theme]) => (
-                    <>
-                      <button
-                        style={{ backgroundColor: theme }}
-                        onClick={this.adopt}
-                      >
-                        Yes
-                      </button>
-                      <button
-                        style={{ backgroundColor: theme }}
-                        onClick={this.toggleModal}
-                      >
-                        No I`m a monster
-                      </button>
-                    </>
-                  )}
-                </ThemeContext.Consumer>
+                <button
+                  style={{ backgroundColor: this.state.theme }}
+                  onClick={this.adopt}
+                >
+                  Yes
+                </button>
+                <button
+                  style={{ backgroundColor: this.state.theme }}
+                  onClick={this.toggleModal}
+                >
+                  No I`m a monster
+                </button>
               </div>
             </div>
           </Modal>
@@ -107,11 +97,15 @@ class Details extends React.Component {
   }
 }
 
+const mapStateToProps = ({ theme }) => ({ theme });
+
+const WrappedDetails = connect(mapStateToProps)(Details);
+
 export default function DetailsWithErroBoundary(props) {
   return (
     <DetailsErrorBoundary>
       {" "}
-      <Details {...props} />
+      <WrappedDetails {...props} />
     </DetailsErrorBoundary>
   );
 }

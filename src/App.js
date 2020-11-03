@@ -1,29 +1,29 @@
 import { Router } from "@reach/router";
-import React, { lazy, Suspense, useState } from "react";
+import React, { lazy, Suspense } from "react";
 import NavBar from "~/components/NavBar";
-import ThemeContext from "~/context/ThemeContext";
-
-const Home = lazy(() => import("~/pages/Home/Home"));
+import store from "~/redux/store/";
+import { Provider } from "react-redux";
+import Spinner from "~/components/Spinner";
 
 const Details = lazy(() => import("~/pages/Details/Details"));
-
+const Home = lazy(() => import("~/pages/Home/Home"));
 const App = () => {
-  const theme = useState("darkblue");
-
   return (
-    <ThemeContext.Provider value={theme}>
-      <React.StrictMode>
-        <div>
+    <React.StrictMode>
+      <div>
+        <Provider store={store}>
           <NavBar />
-          <Suspense fallback={"rednering"}>
+          <Suspense
+            fallback={<Spinner size={50} color={store.getState().theme} />}
+          >
             <Router>
               <Home path="/" />
               <Details path="/details/:id" />
             </Router>
           </Suspense>
-        </div>
-      </React.StrictMode>
-    </ThemeContext.Provider>
+        </Provider>
+      </div>
+    </React.StrictMode>
   );
 };
 

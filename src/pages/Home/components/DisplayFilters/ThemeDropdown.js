@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
-import ThemeContext from "~/context/ThemeContext";
+import React from "react";
 
 const colors = [
   {
     label: "Default",
-    value: "",
+    value: "#ad343e",
   },
   {
     label: "Peru",
@@ -24,13 +23,13 @@ const colors = [
   },
 ];
 
-const ThemeDropdown = () => {
-  const [theme, setTheme] = useContext(ThemeContext);
+const ThemeDropdown = ({ theme, setTheme }) => {
   return (
     <label htmlFor="theme">
       Theme
       <div className="select-container">
         <select
+          data-testid={"use-dropdown-theme"}
           value={theme}
           onChange={(e) => setTheme(e.target.value)}
           onBlur={(e) => setTheme(e.target.value)}
