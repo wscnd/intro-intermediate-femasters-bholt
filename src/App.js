@@ -4,8 +4,8 @@ import { Provider } from "react-redux";
 import NavBar from "~/components/NavBar";
 import store from "~/redux/store/";
 import { render } from "react-dom";
-import { Details } from "~/pages";
 import { Home } from "~/pages";
+import { Details } from "~/pages";
 
 const App = () => {
   return (
